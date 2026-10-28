@@ -1,0 +1,31 @@
+KianCraft
+Copyright (c) 2026 UserForFunzies. All rights reserved.
+
+This repository is public so people can play KianCraft and read how it was
+made. It is NOT open source.
+
+You MAY:
+  - view, read and study the source code in this repository;
+  - download the official KianCraft game from this repository's Releases and
+    play it for your own personal, non-commercial use;
+  - run the game from this source code on your own computer, for your own
+    personal, non-commercial use.
+
+You may NOT, without written permission from the copyright holder:
+  - copy, redistribute, re-upload or share the source code or the game,
+    in whole or in part (sharing a link to this repository is fine);
+  - modify the code and distribute or publish the modified version;
+  - use any part of the code, art, sounds or game in another project;
+  - sell the game or use it for any commercial purpose.
+
+GitHub's Terms of Service also let other GitHub users view and fork this
+repository on GitHub. That does not give anyone any of the rights listed
+under "You may NOT" above.
+
+THE GAME AND SOURCE CODE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE GAME OR CODE.
+
+KianCraft is made with the Godot Engine (https://godotengine.org), which is
+MIT licensed and is the property of its own authors. This license covers only
+KianCraft's own code and content.

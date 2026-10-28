@@ -1,0 +1,51 @@
+# Builds KianCraft.exe on GitHub's servers and attaches it to a release.
+# Runs when a release is published, or by hand from the Actions tab
+# ("Run workflow", then type the release tag, e.g. v1.0.0).
+name: Windows build
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the exe to (e.g. v1.0.0)"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  GODOT_VERSION: "4.7.1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+
+      - name: Download Godot and the Windows export template
+        run: |
+          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable"
+          curl -sSL -o godot.zip "$base/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip
+          mv "Godot_v${GODOT_VERSION}-stable_linux.x86_64" godot
+          curl -sSL -o templates.tpz "$base/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          dir="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$dir"
+          unzip -q -j templates.tpz templates/windows_release_x86_64.exe templates/windows_release_x86_64_console.exe templates/version.txt -d "$dir"
+          rm templates.tpz
+
+      - name: Export KianCraft.exe
+        run: |
+          mkdir -p build
+          ./godot --headless --path . --import || true
+          ./godot --headless --path . --export-release "Windows" build/KianCraft.exe
+          ls -la build
+
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name || inputs.tag }}" build/KianCraft.exe --clobber --repo "${{ github.repository }}"

@@ -1,0 +1,12 @@
+# Godot generated files
+.godot/
+/android/
+*.translation
+
+# Exported builds
+/build/
+/export/
+
+# OS junk
+.DS_Store
+Thumbs.db
